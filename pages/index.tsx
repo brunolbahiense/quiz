@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Botao from '../components/Botao'
 import Questao from '../components/Questao'
 import QuestaoModel from '../model/questao'
 import RespostaModel from '../model/resposta'
@@ -17,14 +18,27 @@ export default function Home() {
     console.log(indice)
     setQuestao(questao.responderCom(indice))
   }
+
+  function tempoEsgotado() {
+    if(questao.naoRespondida){
+      setQuestao(questao.responderCom(-1))
+    }
+  }
+
   return (
     <div style={{
       display: 'flex',
       height: '100vh',
       justifyContent: 'center',
+      flexDirection: 'column',
       alignItems: 'center'
     }}>
-      <Questao valor={questao} respostaFornecida={respostaFornecida}/>
+      <Questao valor={questao} 
+         tempoResposta={5}
+        respostaFornecida={respostaFornecida}
+        tempoEsgotado={tempoEsgotado}
+      />
+      <Botao texto='Proxima' href='/resultado'/>
     </div>
   )
 }

@@ -33,6 +33,9 @@ export default class QuestaoModel {
         }
         return false
     }
+    get naoRespondida() {
+        return !this.respondida
+    }
     // esta parte é bem complexa sobre validar a respota certa
     responderCom(indice: number) : QuestaoModel {
         const acertou = this.#respostas[indice]?.certa
