@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import Botao from '../components/Botao'
-import Questao from '../components/Questao'
+import { useEffect, useState } from 'react'
+import Questionario from '../components/Questionario'
 import QuestaoModel from '../model/questao'
 import RespostaModel from '../model/resposta'
 
@@ -11,34 +10,47 @@ const questaoMoc = new QuestaoModel(1, 'Melhor cor', [
   RespostaModel.certa('PRETO'),
 ])
 
+const BASE_URL =  'http://localhost:3000/api'
 
 export default function Home() {
-  const [questao, setQuestao] = useState(questaoMoc)
-  function respostaFornecida(indice: number) {
-    console.log(indice)
-    setQuestao(questao.responderCom(indice))
+  const [idsDasQuestoes, setIdsDasQuestoes] = useState<number[]>([])
+  const [questao, setQuestao] = useState<QuestaoModel>(questaoMoc)
+
+  async function carregarIdsDasQuestoes() {
+    const resp = await fetch(`${BASE_URL}/questionario`)
+    const idsDasQuestoes = await resp.json()
+    setIdsDasQuestoes(idsDasQuestoes)
   }
 
-  function tempoEsgotado() {
-    if(questao.naoRespondida){
-      setQuestao(questao.responderCom(-1))
-    }
+  async function carregarQuestao(idQuestao: number) {
+    const resp = await fetch(`${BASE_URL}/questoes/${idQuestao}`)
+    const json = await resp.json()
+  }
+
+  
+    useEffect(() => {
+      carregarIdsDasQuestoes()
+    }, [])
+    
+    useEffect(() => {
+      carregarIdsDasQuestoes()
+      idsDasQuestoes.length > 0 && carregarQuestao(idsDasQuestoes[0])
+    }, [idsDasQuestoes])
+
+  function questaoRespondida (props: QuestaoModel){
+
+  }
+
+  function irAoProximoPasso(){
+
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      height: '100vh',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      alignItems: 'center'
-    }}>
-      <Questao valor={questao} 
-         tempoResposta={5}
-        respostaFornecida={respostaFornecida}
-        tempoEsgotado={tempoEsgotado}
-      />
-      <Botao texto='Proxima' href='/resultado'/>
-    </div>
+    <Questionario
+      questao={questao}
+      ultima={true} 
+      questaoRespondida={questaoRespondida}
+      irAoProximoPasso={irAoProximoPasso}
+    />
   )
 }
