@@ -6,3 +6,9 @@
     height: 100vh;
     font-size: 2rem;
 }
+
+@media(max-width: 768px) {
+    .resultado{
+        font-size: 1rem;
+    }
+}

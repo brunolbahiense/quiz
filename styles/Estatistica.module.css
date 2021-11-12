@@ -20,3 +20,20 @@
     font-size: 1.7rem;
     font-weight: 200;
 }
+
+@media(max-width: 768px) {
+    .valor{
+        width: 90px;
+        height: 90px;
+        border-radius: 45px;
+        font-size: 2rem;
+    }
+    .estatistica{
+        margin: 5px;
+    }
+    .texto {
+        color: #ddd ;
+        font-size: 1rem;
+        font-weight: 200;
+    }
+}

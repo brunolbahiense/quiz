@@ -1,10 +1,17 @@
 .resposta{
     display: flex;
     height: 100px;
-    min-width: 500px;
+    min-width: 300px;
     width: 80%;
     margin: 10px;
     perspective: 1000px;
+}
+@media(max-width: 768px) {
+    .resposta{
+        height: 80px;
+        min-width: 300px;
+        width: 80%;
+    }
 }
 
 .conteudoResposta{
