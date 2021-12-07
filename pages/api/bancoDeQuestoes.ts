@@ -23,7 +23,7 @@ const questoes: QuestaoModel[] = [
     new QuestaoModel(204, 'Qual é o triângulo que tem todos os lados diferentes?', [
         RespostaModel.errada('Equilátero'),
         RespostaModel.errada('Isóceles'),
-        RespostaModel.errada('Trapézio'),
+        RespostaModel.errada('Bermudas'),
         RespostaModel.certa('Escaleno'),
     ]),
     new QuestaoModel(205, 'Quem compôs o Hino da Independência?', [
